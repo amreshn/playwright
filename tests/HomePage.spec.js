@@ -33,7 +33,7 @@ test("Test Scenario 2", async ({page})=>{
     }
 });
 
-test("Test Scenario 3", async ({page})=>{
+test("Test Scenario 3", async ({browserName, page})=>{
     await page.goto("https://www.lambdatest.com/selenium-playground/");
     await expect(page).toHaveTitle("Selenium Grid Online | Run Selenium Test On Cloud");
     await page.locator("[href*='input-form-demo']").click();
@@ -58,7 +58,14 @@ test("Test Scenario 3", async ({page})=>{
         const input = element;
         return input.validationMessage;
     });
-    expect(validationMessage).toBe("Please fill out this field.");
+
+    if(browserName == "webkit"){
+        expect(validationMessage).toBe("Fill out this field");
+    }
+    else{
+        expect(validationMessage).toBe("Please fill out this field.");
+    }
+    
 
     await nameField.fill("Sachin");
     await email.fill("abc@gmail.com");
