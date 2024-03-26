@@ -42,8 +42,8 @@ const modifyCapabilities = (configName, testName) => {
     capabilities['LT:Options']['build'] = 'Playwright JS Android Build'
     capabilities['LT:Options']['isRealMobile'] = true
 
-    //delete capabilities.browserName;
-    //delete capabilities.browserVersion;
+    delete capabilities.browserName;
+    delete capabilities.browserVersion;
   } else {
     // Desktop test
     let [browserName, browserVersion, platform] = config.split(':')
