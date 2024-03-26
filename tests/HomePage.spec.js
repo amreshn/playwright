@@ -1,4 +1,5 @@
-const {test, expect} = require('@playwright/test');
+const { test } = require('../lambdatest-setup');
+const {expect} = require('@playwright/test');
 const { url } = require('inspector');
 
 test("Test Scenario 1", async ({browser})=>{
@@ -27,7 +28,8 @@ test("Test Scenario 2", async ({page})=>{
     for( let i=0; i<=requiredValue-defaultValue ; i++){
         await page.keyboard.press('ArrowRight');
         if(await page.locator("#rangeSuccess").textContent() === requiredValue.toString()){
-            expect(page.locator("#rangeSuccess")).toHaveText(requiredValue.toString());
+            const successRange = await page.locator("#rangeSuccess").textContent();
+            expect(successRange).toBe(requiredValue.toString());
             break;
         }
     }
