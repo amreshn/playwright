@@ -17,9 +17,11 @@ test("Test Scenario 1", async ({browser})=>{
     expect(actualMessage).toBe(textMessage);
 });
 
-test("Test Scenario 2", async ({page})=>{
+test("Test Scenario 2", async ({browser})=>{
     const requiredValue = 95;
     const defaultValue = 15;
+    const context = await browser.newContext();
+    const page = await context.newPage();
     await page.goto("https://www.lambdatest.com/selenium-playground/");
     await expect(page).toHaveTitle("Selenium Grid Online | Run Selenium Test On Cloud");
     await page.locator("[href*='drag-drop-range-sliders-demo']").click();
@@ -35,7 +37,9 @@ test("Test Scenario 2", async ({page})=>{
     }
 });
 
-test("Test Scenario 3", async ({browserName, page})=>{
+test("Test Scenario 3", async ({browserName, browser})=>{
+    const context = await browser.newContext();
+    const page = await context.newPage();
     await page.goto("https://www.lambdatest.com/selenium-playground/");
     await expect(page).toHaveTitle("Selenium Grid Online | Run Selenium Test On Cloud");
     await page.locator("[href*='input-form-demo']").click();
